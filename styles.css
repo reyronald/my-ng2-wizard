@@ -1,0 +1,21 @@
+html, body {
+	height: 100%; 
+}
+body {
+	background-color: rgba(128,128,128,0.15);
+}
+.my-content {
+	min-height: 100%; 
+	background-color: white;
+	padding-left: 5em;
+	padding-right: 5em;
+	-webkit-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.6);
+	box-shadow: 0px 0px 30px 2px rgba(0,0,0,0.6);
+}
+.loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);	 	
+}

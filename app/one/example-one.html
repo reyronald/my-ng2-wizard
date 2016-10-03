@@ -1,0 +1,48 @@
+<hr>
+
+<div class="row">
+	<button class="btn btn-primary pull-left" (click)="onPrevious()" [disabled]="isFirstStep()">Previous</button>
+	<button class="btn btn-primary pull-right" (click)="onNext()" [disabled]="isLastStep()">Next</button>
+</div>
+
+<br>
+
+<div *ngIf="currentStep == ExampleOneWizardStep.StepOne">
+	<my-example-one-step1></my-example-one-step1>
+</div>
+
+<div *ngIf="currentStep == ExampleOneWizardStep.StepTwo">
+	<my-example-one-step2></my-example-one-step2>
+</div>
+
+<div *ngIf="currentStep == ExampleOneWizardStep.StepThree">
+	<my-example-one-step3></my-example-one-step3>
+</div>
+
+<hr>
+
+<p>
+In this approach, a directive is created for each step. Each step will then be called with their respective selectors on one parent component's template. The <em>Previous</em> and <em>Next</em> buttons are defined on this parent template aswell, so they are reusable in the whole wizard.
+</p>
+
+<p>
+For the functionality to work, the parent component should have declared an <code>enum</code> with one element per step, and should extend from the class <code>Wizard&lt;T&gt;</code> where <code>T</code> is the mentioned enum.
+</p>
+
+<h3>Caveats</h3>
+
+<ul>
+	<li>Since every step of the wizard is a directive called from one routable component, pressing the <em>Back</em> button on the browser in any of the wizard's step will take you back to the visited route before the wizard, not the previous step. In other words, there are no routes associated to each step of the component, meaning you can't directly navigate to any step.</li>
+	<li>Data can be shared among steps using an <code>@Input</code> property, for each step, and initializing it in the parent component.</li>
+	<li>Since the <em>Previous</em> and <em>Next</em> buttons are defined in the parent component and reused throughout the wizard, it would become pretty difficult to have step specific validation logic trigger before changing steps. If this functionality is desired, a more flexible approach where these buttons are defined on each step instead would be better suited.</li>
+</ul>
+
+<h3>Summary</h3>
+
+<p>I would recommend this approach if:</p>
+
+<ol>
+	<li>Direct route-based navigation to each step is not necessary.</li>
+	<li>Returning to a previous step using the browser's <em>Back</em> button is not desired.</li>
+	<li>There won't be any necessary validation logic between steps.</li>
+</ol>
