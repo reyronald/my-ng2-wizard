@@ -1,0 +1,40 @@
+<h2>Two</h2>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+<hr>
+
+<p>In this approach, each step resides on a routable component of its own, meaning that there's a URL for every step, instead of every step living inside one route (URL). This requires that a new module is created for the wizard, along with its routes definition. 
+</p>
+
+<p>
+Also, each step is responsible for defining all of its markup, including the buttons to navigate from one step to the other. 
+</p>
+
+<p>
+This solution requires more boilerplate code, but provides a lot more flexibility, and can be used for almost every use-case. 
+</p>
+
+<h3>Caveats</h3>
+
+<ul>
+	<li>Data is shared among the steps with a service.</li>
+	<li>Validation logic can be included on each step for preventing advancing or going back if certain conditions are met. This conditions can be defined at the component or service level.</li>
+	<li>Since there is a route associated to each step, the browser's <em>back</em> button will move one step back in the wizard, instead of leaving it altogether. Direct URL based navigation to any specific step is also possible.</li>
+	<li>Requires the definition of a new module and routes.</li>
+</ul>
+
+<p>If you don't want users to navigate directly to any step other than the first, that's where you would use the state of the data stored in your service to figure out in which step the user should be, and redirect him to it.
+</p>
+
+<h3>Summary</h3>
+
+<p>I would recommend this approach if:</p>
+
+<ol>
+	<li>Direct route-based navigation to each step IS necessary.</li>
+	<li>Returning to a previous step using the browser's <em>Back</em> button IS desired.</li>
+	<li>There needs to be validation logic between steps.</li>
+</ol>
